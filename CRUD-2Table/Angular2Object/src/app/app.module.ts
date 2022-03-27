@@ -3,20 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TodoComponent } from './todo/todo.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { FormRegisterComponent } from './form-register/form-register.component';
+import { CityComponent } from './city/city.component';
+import {HttpClientModule} from "@angular/common/http";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodoComponent,
-    FormRegisterComponent
+    CityComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    HttpClientModule,
     ReactiveFormsModule
   ],
   providers: [],
