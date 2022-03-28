@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CityComponent } from './city/city.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,7 +22,6 @@ import {MatSortModule} from '@angular/material/sort';
 @NgModule({
   declarations: [
     AppComponent,
-    CityComponent,
     DialogComponent
   ],
   imports: [

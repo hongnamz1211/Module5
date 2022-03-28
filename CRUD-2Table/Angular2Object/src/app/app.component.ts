@@ -22,6 +22,8 @@ export class AppComponent implements OnInit, OnChanges {
   cities!: City[];
   city!: City;
 
+
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -37,13 +39,17 @@ export class AppComponent implements OnInit, OnChanges {
   openFormCreate() {
     this.dialog.open(DialogComponent, {
       width: '50%'
-    });
+    }).afterClosed().subscribe(val => {
+        this.getAllCity();
+    })
   }
 
   openFormEdit(row: any) {
     this.dialog.open(DialogComponent, {
       width: '50%',
       data: row
+    }).afterClosed().subscribe(val => {
+        this.getAllCity();
     })
   }
 
