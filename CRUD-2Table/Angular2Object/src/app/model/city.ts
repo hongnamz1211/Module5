@@ -1,3 +1,5 @@
+import {National} from "./national";
+
 export interface City {
   id?: number;
   name?: string;
@@ -5,5 +7,5 @@ export interface City {
   population?: number;
   gdp?: number;
   description?: string;
-  national?: object;
+  national?: National;
 }

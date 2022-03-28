@@ -2,7 +2,9 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {City} from "../model/city";
 import {CityService} from "../service/city.service";
-// import {MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {National} from "../model/national";
+import {NationalService} from "../service/national.service";
 
 @Component({
   selector: 'app-dialog',
@@ -14,21 +16,25 @@ export class DialogComponent implements OnInit {
   formCity: FormGroup = new FormGroup({});
   cities!: City[];
   city!: City;
+  nationals?: National[];
 
   constructor(private cityService: CityService,
               private formGroup: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public editData: any) { }
+              @Inject(MAT_DIALOG_DATA) public editData: any,
+              private nationalService: NationalService) { }
 
   ngOnInit(): void {
+    this.getAllNational()
     this.formCity = this.formGroup.group({
       id: [''],
       name: ['', [Validators.required]],
-      national: [''],
+      nation: [''],
       area: ['', [Validators.required, Validators.min(1)]],
       population: ['', [Validators.required, Validators.min(1)]],
       gdp: ['', [Validators.required, Validators.min(1)]],
       description: ['', [Validators.required]],
     })
+    console.log(this.formCity)
     if (this.editData) {
       this.formCity.controls['id'].setValue(this.editData.id);
       this.formCity.controls['name'].setValue(this.editData.name);
@@ -36,8 +42,14 @@ export class DialogComponent implements OnInit {
       this.formCity.controls['population'].setValue(this.editData.population);
       this.formCity.controls['gdp'].setValue(this.editData.gdp);
       this.formCity.controls['description'].setValue(this.editData.description);
-      this.formCity.controls['national'].setValue(this.editData.national.id);
+      this.formCity.controls['national'].setValue(this.editData.nation);
     }
+  }
+
+  getAllNational() {
+    this.nationalService.getAllNational().subscribe((data) => {
+      this.nationals = data;
+    })
   }
 
   createCity() {
@@ -49,8 +61,9 @@ export class DialogComponent implements OnInit {
       gdp: this.formCity.value.gdp,
       description: this.formCity.value.description,
       national: {
-        id: this.formCity.value.national}
+        id: this.formCity.value.nation}
     };
+    console.log(city)
     this.cityService.createCity(city).subscribe(() => {
       alert('Create successfully');
     })
