@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {City} from "../model/city";
+import {CityService} from "../service/city.service";
 
 @Component({
   selector: 'app-city',
@@ -9,10 +10,12 @@ import {City} from "../model/city";
 })
 export class CityComponent implements OnInit {
 
-  formCity: FormGroup;
-  cities: City[] = new ;
+  formCity: FormGroup = new FormGroup({});
+  cities?: City[];
+  city?: City;
 
-  constructor() { }
+  constructor(private cityService: CityService,
+              private formGroup: FormBuilder) { }
 
   ngOnInit(): void {
   }

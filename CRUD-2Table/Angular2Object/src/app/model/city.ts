@@ -5,5 +5,5 @@ export interface City {
   population?: number;
   gdp?: number;
   description?: string;
-  national?: string;
+  national?: object;
 }
