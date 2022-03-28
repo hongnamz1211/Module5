@@ -2,8 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {City} from "../model/city";
 import {CityService} from "../service/city.service";
-import {AppComponent} from "../app.component";
-import {MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
+// import {MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-dialog',
@@ -18,8 +17,7 @@ export class DialogComponent implements OnInit {
 
   constructor(private cityService: CityService,
               private formGroup: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public editData: any,
-              private dialogRef: MatDialogRef<DialogComponent>) { }
+              @Inject(MAT_DIALOG_DATA) public editData: any) { }
 
   ngOnInit(): void {
     this.formCity = this.formGroup.group({
@@ -61,6 +59,7 @@ export class DialogComponent implements OnInit {
   editCity(id: number) {
     this.cityService.getCityById(id).subscribe(data => this.formCity.patchValue(data));
   }
+
 
 
 }
